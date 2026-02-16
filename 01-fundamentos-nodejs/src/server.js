@@ -2,6 +2,14 @@
 // ESModules => import/export .... import http from "http";
 import http from "node:http";
 
+// node:crypto randomUUID => gera um UUID aleatório
+import { randomUUID } from "node:crypto";
+
+// middleware é um interceptador de requisições e respostas
+// sempre vão receber o request e o response e vão executar uma função antes de continuar
+import { json } from "./middlewares/json.js";
+import { Database } from "./database.js";
+
 // Stateful - Salva o estado da aplicação em memória até que a aplicacão seja reiniciada
 // Stateless - Não salva nada em memória, a aplicação vai guardar as informações em um banco de dados.
 
@@ -11,9 +19,9 @@ import http from "node:http";
 
 // HTTP Status Code => 200, 201, 400, 404, 500
 
-const users = [];
+const database = new Database();
 
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
   /*
     Requisições HTTP
     - Método HTTP
@@ -29,13 +37,17 @@ const server = http.createServer((request, response) => {
     */
   const { method, url } = request;
 
+  await json(request, response);
+
   if (method == "GET" && url == "/users") {
     // Early return
-    return response.setHeader("Content-Type", "application/json").end(JSON.stringify(users));
+    // é quando o retorno é feito antes de terminar a função
+    return response.end(JSON.stringify(database.select("users")));
   }
 
   if (method == "POST" && url == "/users") {
-    users.push({ id: 1, name: "Adelmo", email: "contato@adelmodias.com.br" });
+    const { name, email } = request.body;
+    database.insert("users", { id: randomUUID(), name, email });
     return response.writeHead(201).end();
   }
 

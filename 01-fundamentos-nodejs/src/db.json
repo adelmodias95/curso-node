@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Adelmo",
+      "email": "contato@adelmodias.com.br"
+    },
+    {
+      "id": "138e960a-c107-4c0b-8c0e-7e4cc948a7cf",
+      "name": "Adelmo",
+      "email": "contato@adelmodias.com.br"
+    },
+    {
+      "id": "2b74597b-18f6-4a3b-b8be-0ff1a3c42630",
+      "name": "Adelmo",
+      "email": "contato@adelmodias.com.br"
+    }
+  ]
+}
