@@ -17,8 +17,11 @@ import { routes } from "./routes.js";
 
 // HTTP Status Code => 200, 201, 400, 404, 500
 
-// Early return
-// é quando o retorno é feito antes de terminar a função
+// Early return: é quando o retorno é feito antes de terminar a função
+
+// Query parameters: ?name=Diego&age=20 - Muito utilizado para filtros, paginação, etc.
+// Route parameters: /users/1 - Muito utilizado para buscar um recurso específico.
+// Request body: { name: "Diego", age: 20 } - Muito utilizado para criar ou atualizar um recurso.
 
 const server = http.createServer(async (request, response) => {
   /*
@@ -39,10 +42,14 @@ const server = http.createServer(async (request, response) => {
   await json(request, response);
 
   const route = routes.find((route) => {
-    return route.method === method && route.path === url;
+    return route.method === method && route.path.test(url);
   });
 
   if (route) {
+    const routeParams = request.url.match(route.path);
+
+    request.params = { ...routeParams.groups };
+
     return route.handler(request, response);
   }
 
