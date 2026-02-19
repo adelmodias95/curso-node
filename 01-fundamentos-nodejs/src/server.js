@@ -1,5 +1,6 @@
 // CommonJS => require .... const http = require("http");
 // ESModules => import/export .... import http from "http";
+// Node http: Serve para criar um servidor HTTP.
 import http from "node:http";
 
 // middleware é um interceptador de requisições e respostas
