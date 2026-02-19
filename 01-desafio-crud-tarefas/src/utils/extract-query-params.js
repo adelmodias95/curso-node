@@ -1,7 +1,6 @@
 /**
  * Essa função serve para extrair os query parameters da URL.
  */
-
 // '?search=Adelmo'
 export function extractQueryParams(query) {
   return query
