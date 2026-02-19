@@ -1,19 +1,14 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Adelmo",
-      "email": "contato@adelmodias.com.br"
+      "id": "8510a5ae-939f-48d2-ac69-12aad292cdb1",
+      "name": "Adelmo Dias",
+      "email": "contato2@adelmodias.com.br"
     },
     {
-      "id": "2b74597b-18f6-4a3b-b8be-0ff1a3c42630",
-      "name": "Adelmo",
-      "email": "contato@adelmodias.com.br"
-    },
-    {
-      "id": "df7890b6-20ff-4f9f-bd32-1a3aab3d7b49",
-      "name": "Adelmo",
-      "email": "contato@adelmodias.com.br"
+      "id": "4f84ce96-d9a6-401e-8ee6-0d901d451310",
+      "name": "Jhon Doe",
+      "email": "jhon.doe@email.com"
     }
   ]
 }

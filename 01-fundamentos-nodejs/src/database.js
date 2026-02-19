@@ -20,8 +20,24 @@ export class Database {
       });
   }
 
-  select(table) {
-    const data = this.#database[table] ?? [];
+  select(table, search) {
+    let data = this.#database[table] ?? [];
+
+    if (search) {
+      data = data.filter((row) => {
+        /**
+         * Quando usa o entries, ele retorna um array de arrays, onde o primeiro elemento é a chave e o segundo é o valor.
+         * {'name': 'Adelmo', 'email': 'contato@adelmodias.com.br'}
+         * [['name', 'Adelmo'], ['email', 'contato@adelmodias.com.br']]
+         *
+         * O .some() é um método que verifica se algum elemento do array atende a condição.
+         */
+        return Object.entries(search).some(([key, value]) => {
+          return row[key].toLowerCase().includes(value.toLowerCase());
+        });
+      });
+    }
+
     return data;
   }
 
@@ -35,6 +51,14 @@ export class Database {
     this.#persist();
 
     return data;
+  }
+
+  update(table, id, data) {
+    const rowIndex = this.#database[table].findIndex((row) => row.id === id);
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex] = { id, ...data };
+      this.#persist();
+    }
   }
 
   delete(table, id) {
